@@ -3,15 +3,15 @@
 [<EntryPoint>]
 let main args =
     printfn "Arguments passed to function : %A" args
-    let maximumCounter = 100   
+    let maximumCounter = 100000   
 
     async {
-        let board = GameOfLife.Board(10, 10)
-        board.SetInitial()
+        let board = GameOfLife.Board(30, 60)
+        board.FillRandom()
         board.Print()
         
         for i = 0 to maximumCounter do
-            do! Async.Sleep(1000)
+            do! Async.Sleep(0)
             board.MoveNext()
             board.Print()
     } |> Async.RunSynchronously

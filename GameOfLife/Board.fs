@@ -14,7 +14,7 @@ type Board (height : int, width : int) =
         | -1 -> (height - 1)
         | x when x = height -> 0
         | _ -> height'
-    let getSafeIndex (width', height') = (safeWidth width', safeHeight height')
+    let getSafeIndex (height', width') = (safeHeight height', safeWidth width')
     let relativeCoordinates = [
         for x in -1 .. 1 do
             for y in -1 .. 1 do
@@ -61,6 +61,14 @@ type Board (height : int, width : int) =
         internalMatrix[7,6] <- true
         internalMatrix[6,7] <- true
         internalMatrix[7,7] <- true
+    member this.FillRandom() = do
+        let getRandomBool() =
+            match System.Random.Shared.Next(0, 3) with
+            | 0 -> true
+            | _ -> false
+        let newMatrix = Array2D.init height width (fun _ _ -> getRandomBool())
+        
+        internalMatrix <- newMatrix
     member this.MoveNext() = do
         let f a b value = (numberOfNeighbors a b, value)
         let newMatrix = Array2D.mapi f internalMatrix
