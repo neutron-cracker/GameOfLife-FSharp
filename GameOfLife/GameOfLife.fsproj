@@ -6,8 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Start.fs" />
-        <Compile Include="Next.fs" />
+        <Compile Include="Board.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 
